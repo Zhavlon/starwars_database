@@ -10,15 +10,15 @@ import './app.css';
 const App = () => {
   return (
     <div>
-      <Header />
-      <RandomPlanet />
+      <Header/>
+      <RandomPlanet/>
 
       <div className="row mb2">
         <div className="col-md-6">
-          <ItemList />
+          <ItemList/>
         </div>
         <div className="col-md-6">
-          <PersonDetails />
+          <PersonDetails/>
         </div>
       </div>
     </div>
