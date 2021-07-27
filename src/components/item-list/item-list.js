@@ -1,47 +1,52 @@
 import React, {Component} from 'react';
-import SwapiService from "../../services/swapi-service";
 import Spinner from "../spinner";
 import './item-list.css';
+// import ErrorButton from "../error-button";
 
 export default class ItemList extends Component {
-  constructor() {
-    super();
-    this.updatePeopleList()
-  }
+	state = {
+		data: null,
+		loading: true
+	}
 
-  state = {
-    data: null,
-    loading: true
-  }
-  swapi = new SwapiService();
+	componentDidMount() {
+		this.updatePeopleList();
+	}
 
-  updatePeopleList = () => {
-    this.swapi.getAllPeople()
-      .then(data => {
-        this.setState({
-          data: data,
-          loading: false
-        })
-      })
-  }
+	updatePeopleList = () => {
+		this.props.getData()
+			.then(data => {
+				this.setState({
+					data: data,
+					loading: false
+				})
+			})
+	}
 
-  renderPeopleList = (arr) => {
-    const people = arr.map(item => {
-      return (
-        <li key={item.id} className='list-group-item'>
-          {item.name}
-        </li>
-      )
-    })
-    return people
-  }
+	renderPeopleList = (arr) => {
+		const people = arr.map((item) => {
+			return (
+				<li
+					onClick={() => {
+						this.props.selectId(item.id)
+					}}
+					key={item.id} className='list-group-item'>
+					{this.props.children(item)}
+				</li>
+			)
+		})
+		return people
+	}
 
-  render() {
-    const content = this.state.loading ? <Spinner/> : this.renderPeopleList(this.state.data)
-    return (
-      <ul className="item-list list-group">
-        {content}
-      </ul>
-    );
-  }
+	render() {
+		const {loading, data} = this.state
+
+		const content = loading ? <Spinner/> : this.renderPeopleList(data)
+		return (
+			<ul className="item-list list-group">
+				{content}
+				{/*<ErrorButton/>*/}
+			</ul>
+		);
+	}
 }
