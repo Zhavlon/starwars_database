@@ -10,10 +10,10 @@ export default class ItemList extends Component {
 	}
 
 	componentDidMount() {
-		this.updatePeopleList();
+		this.updateItemList();
 	}
 
-	updatePeopleList = () => {
+	updateItemList = () => {
 		this.props.getData()
 			.then(data => {
 				this.setState({
@@ -23,7 +23,7 @@ export default class ItemList extends Component {
 			})
 	}
 
-	renderPeopleList = (arr) => {
+	renderElements = (arr) => {
 		const people = arr.map((item) => {
 			return (
 				<li
@@ -41,7 +41,7 @@ export default class ItemList extends Component {
 	render() {
 		const {loading, data} = this.state
 
-		const content = loading ? <Spinner/> : this.renderPeopleList(data)
+		const content = loading ? <Spinner/> : this.renderElements(data)
 		return (
 			<ul className="item-list list-group">
 				{content}
