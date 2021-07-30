@@ -51,7 +51,6 @@ class RandomPlanet extends Component {
 	swapi = new SwapiService();
 
 	updatePlanet = () => {
-		console.log('update planet')
 		const planetId = Math.floor((Math.random() * 18 + 2));
 		this.swapi.getPlanet(planetId)
 			.then(data => {
