@@ -1,23 +1,6 @@
 import React from 'react'
 import {ItemDetails, Record} from "../item-details";
-import {Consumer} from "../swapi-context/swapi-context";
-
-const withSwapiService = (ComponentView, methodsToProps) => {
-	return (props) => {
-		return (
-			<Consumer>
-				{
-					(Swapi) => {
-						const new_props = methodsToProps(new Swapi());
-						return (
-							<ComponentView {...props} {...new_props}/>
-						)
-					}
-				}
-			</Consumer>
-		)
-	}
-}
+import withSwapiService from '../hoc/with-swapi-service';
 
 const PersonDetails = ({getPerson, getPersonImage}) => {
 	return (
@@ -41,4 +24,3 @@ const methodsToProps = (swapi_object) => {
 }
 
 export default withSwapiService(PersonDetails, methodsToProps);
-

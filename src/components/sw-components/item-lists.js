@@ -1,6 +1,6 @@
 import React from 'react';
 import SwapiService from "../../services/swapi-service";
-import withData from "../hoc/withData";
+import withData from "../hoc/with-data";
 import ItemList from "../item-list";
 
 const {getAllPlanets, getAllPeople, getAllStarships} = new SwapiService();
